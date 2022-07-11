@@ -1,20 +1,33 @@
 import React from 'react';
 import { Amount, Category, CategoryName, Container, Date, Footer, Icon, Title } from './styles';
 
+interface CategoryProps {
+    name: string;
+    icon: string;
+}
+interface Data {
+    title: string;
+    amount: string;
+    category: CategoryProps;
+    date: string;
+}
+interface Props {
+    data: Data;
+}
 
-export function TransactionCard() {
+export function TransactionCard({ data }: Props) {
     return (
         <Container>
-            <Title>Desenvolvimento de Site</Title>
+            <Title>{data.title}</Title>
 
-            <Amount>R$ 12.000,00</Amount>
+            <Amount>{data.amount}</Amount>
 
             <Footer>
                 <Category>
                     <Icon name={"dollar-sign"} />
-                    <CategoryName>Vendas</CategoryName>
+                    <CategoryName>{data.category.name}</CategoryName>
                 </Category>
-                <Date>10/07/2022</Date>
+                <Date>{data.date}</Date>
             </Footer>
         </Container>
     )
