@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import { HighlightCard } from "../../components/HighlightCard";
 import {
@@ -24,6 +24,7 @@ import {
   TransactionList,
   LogoutButton,
 } from "./styles";
+import { useFocusEffect } from "@react-navigation/native";
 export interface DataListProps extends TransactionCardProps {
   id: string;
 }
@@ -66,6 +67,12 @@ export function Dashboard() {
   useEffect(() => {
     loadTransactions();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadTransactions();
+    }, [])
+  );
 
   return (
     <Container>
